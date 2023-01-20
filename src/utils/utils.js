@@ -17,7 +17,20 @@ const waitFor = async (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
+const undefinedFilter = (obj) => {
+    let newObj = {};
+
+    for (let key in obj) {
+      if (obj[key] !== undefined) {
+        newObj[key] = obj[key];
+      }
+    }
+
+    return newObj;
+}
+
 module.exports = {
     log,
-    waitFor
+    waitFor,
+    undefinedFilter
 }
