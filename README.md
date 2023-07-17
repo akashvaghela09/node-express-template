@@ -1,1 +1,1 @@
-# node-express-firebase-template
+# node-express-template
