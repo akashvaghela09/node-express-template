@@ -12,12 +12,20 @@ const usersRoutes = require("./src/routes/user");
 app.use("/users", usersRoutes);
 
 app.get("/test", (req, res) => {
-    res.status(200).json(`Server OK... ${process.pid}`);
+  res.status(200).json(`Server OK... ${process.pid}`);
 });
 
-app.listen(config.port, async () => {
-    console.log(`:::: Server Started => PORT ${config.port} | ${config.environment} mode ::::`);
+// Check if the module is being run directly
+if (require.main === module) {
+  app.listen(config.port, async () => {
+    console.log(
+      `:::: Server Started => PORT ${config.port} | ${config.environment} mode ::::`
+    );
 
     const url = `http://localhost:${config.port}/test`;
     console.log(`\nCheck status at ${url} \n`);
-});
+  });
+} else {
+  // Export the app instance for importing
+  module.exports = app;
+}
